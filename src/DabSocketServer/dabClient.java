@@ -37,9 +37,9 @@ public class dabClient implements Runnable {
     			this.out = new ObjectOutputStream (socket.getOutputStream());
     			this.listeSockets.add(this);
     			
-//    			this.sendListeClients(this.listeClients);
+    			this.sendIdClient();
     			this.sendListeClientsToAll(listeClients);
-//    			socket.close();
+
         	}
         
         } catch (IOException e) {
@@ -47,19 +47,9 @@ public class dabClient implements Runnable {
 		}
 	}
 	
-	public List<String> getClientListe(){
-		return this.listeClients;
+	public void sendIdClient() throws IOException{
+		this.out.writeObject(this.adresse);
 	}
-	
-//	public void sendListeClients(List<String> listeClients){
-//		try {
-//			this.out = new ObjectOutputStream (this.socket.getOutputStream());
-//	        out.writeObject(listeClients);
-//	        out.flush();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
 	
 	public void sendListeClientsToAll(List<String> listeClients){
 		try {
